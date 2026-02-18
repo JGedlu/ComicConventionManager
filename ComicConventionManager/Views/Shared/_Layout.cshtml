@@ -9,25 +9,20 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ComicConventionManager.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                Comic Convention
-            </a>
-
-            <div class="navbar-nav">
-                <a class="nav-link" asp-controller="Panel" asp-action="Index">Panels</a>
-                <a class="nav-link" asp-controller="Guest" asp-action="Index">Guests</a>
-            </div>
-
-            <div class="navbar-nav ms-auto">
-                <partial name="_LoginPartial" />
-            </div>
+<body class="main-background">
+    <header class="top-bar">
+        <div class="top-left">
+            <img src="~/images/logo.png" class="logo" />
+            <span class="site-title">Comic Convention</span>
         </div>
-    </nav>
 
-    <div class="container mt-4">
+        <div class="top-right">
+            <a href="#" class="top-link">My Schedule (Must be logged in)</a>
+            <a href="#" class="top-link">Login</a>
+        </div>
+    </header>
+
+    <div class="page-content">
         @RenderBody()
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

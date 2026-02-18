@@ -1,27 +1,64 @@
-﻿@{
-    ViewData["Title"] = "Dashboard";
-}
+﻿@model List<ComicConventionManager.Models.Panel>
 
-<h1>Convention Dashboard</h1>
+<div class="dashboard-layout">
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="card p-3">
-            <h3>View Panels</h3>
-            <p>Browse upcoming convention panels.</p>
-            <a asp-controller="Panel" asp-action="Index" class="btn btn-primary">
-                Browse Panels
-            </a>
-        </div>
-    </div>
+    <aside class="sidebar">
+        <a href="#">Notices</a>
+        <a href="#">Guests</a>
+        <a href="#">Location</a>
+        <a href="#">Manage Panels</a>
+        <a href="#">Create Notice</a>
+    </aside>
 
-    <div class="col-md-6">
-        <div class="card p-3">
-            <h3>Featured Guests</h3>
-            <p>See which guests are attending.</p>
-            <a asp-controller="Guest" asp-action="Index" class="btn btn-secondary">
-                Browse Guests
-            </a>
-        </div>
-    </div>
+    <main class="panel-area">
+
+        @foreach (var panel in Model)
+        {
+            <div class="panel-card">
+
+                <div class="panel-header">
+                    <h3>@panel.Title</h3>
+
+                    <button class="add-btn" title="Add to My Panels">+</button>
+                </div>
+
+                <p>@panel.Description</p>
+
+                <div class="panel-meta">
+
+                    @{
+                        string formattedDate;
+
+                        if (panel.EndDate != null)
+                        {
+                            formattedDate =
+                            $"{panel.StartDate:MMMM d} – {panel.EndDate:MMMM d, yyyy}";
+                        }
+                        else if (panel.StartTime != null)
+                        {
+                            formattedDate =
+                            $"{panel.StartDate:MMMM d, yyyy} · {DateTime.Today.Add(panel.StartTime.Value):h:mm tt}";
+                        }
+                        else
+                        {
+                            formattedDate =
+                            $"{panel.StartDate:MMMM d, yyyy}";
+                        }
+                    }
+
+                    @formattedDate
+                    · @panel.LocationName
+
+                    @if (!string.IsNullOrEmpty(panel.GoogleMapsLink))
+                    {
+                        <a href="@panel.GoogleMapsLink"
+                           target="_blank"
+                           class="map-link">
+                            View Map
+                        </a>
+                    }
+                </div>
+            </div>
+        }
+    </main>
 </div>
