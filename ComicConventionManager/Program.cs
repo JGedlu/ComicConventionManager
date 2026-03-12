@@ -12,6 +12,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
@@ -23,6 +24,20 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     await SeedRolesAsync(services);
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    string[] roles = { "Admin", "User" };
+
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
 }
 
 // Configure the HTTP request pipeline.
@@ -58,9 +73,7 @@ app.Run();
 static async Task SeedRolesAsync(IServiceProvider serviceProvider)
 {
     var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
     string[] roles = { "Admin", "Attendee" };
-
     foreach (var role in roles)
     {
         if (!await roleManager.RoleExistsAsync(role))

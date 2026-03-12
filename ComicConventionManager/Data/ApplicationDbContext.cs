@@ -13,6 +13,8 @@ namespace ComicConventionManager.Data
 
         public DbSet<Panel> Panels { get; set; }
         public DbSet<Guest> Guests { get; set; }
+        public DbSet<UserPanel> UserPanels { get; set; }
+        public DbSet<Notice> Notices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

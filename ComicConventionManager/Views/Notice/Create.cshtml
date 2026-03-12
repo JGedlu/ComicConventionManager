@@ -1,0 +1,51 @@
+﻿@model ComicConventionManager.Models.Notice
+
+<div class="dashboard-layout">
+
+    <aside class="sidebar">
+        <a asp-controller="Notice" asp-action="Index">Notices</a>
+        <a href="#">Guests</a>
+        <a href="#">Location</a>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-controller="Panel" asp-action="Manage" style="color:red;">Manage Panels</a>
+            <a asp-controller="Notice" asp-action="Manage" style="color:red;">Manage Notices</a>
+        }
+    </aside>
+
+    <main class="panel-area">
+
+        <div class="page-header">
+            <h1>Create Notice</h1>
+        </div>
+
+        <form asp-action="Create">
+
+            <div class="panel-card">
+
+                <label>Title</label>
+                <input asp-for="Title" class="form-control" />
+
+                <label>Content</label>
+<textarea asp-for="Content" class="form-control notice-content-box"></textarea>
+
+                <div class="notice-create-controls">
+
+                    <button type="submit" class="browse-panels">
+                        Create Notice
+                    </button>
+
+                    <label class="publish-toggle">
+                        <input asp-for="IsPublished" />
+                        Publish immediately
+                    </label>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </main>
+</div>

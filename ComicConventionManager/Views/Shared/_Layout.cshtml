@@ -11,14 +11,52 @@
 </head>
 <body class="main-background">
     <header class="top-bar">
-        <div class="top-left">
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="top-left"
+           style="text-decoration:none; color:inherit;">
+
             <img src="~/images/logo.png" class="logo" />
             <span class="site-title">Comic Convention</span>
-        </div>
+        </a>
 
         <div class="top-right">
-            <a href="#" class="top-link">My Schedule (Must be logged in)</a>
-            <a href="#" class="top-link">Login</a>
+            @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
+            {
+                <a asp-controller="Schedule"
+                   asp-action="Index"
+                   class="top-link">
+                    My Schedule
+                </a>
+            }
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <span class="top-link">
+                    @User.Identity.Name
+                </span>
+
+                <form asp-controller="Account"
+                      asp-action="Logout"
+                      method="post"
+                      class="logout-form">
+
+                    @Html.AntiForgeryToken()
+
+                    <button type="submit" class="top-link logout-link">
+                        Logout
+                    </button>
+
+                </form>
+            }
+            else
+            {
+                <a asp-controller="Account"
+                   asp-action="Login"
+                   class="top-link">
+                    Login
+                </a>
+            }
         </div>
     </header>
 

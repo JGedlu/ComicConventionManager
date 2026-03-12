@@ -192,3 +192,219 @@ body.main-background {
     font-weight: 600;
     text-decoration: none;
 }
+
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.auth-card {
+    background: white;
+    width: 420px;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    text-align: center;
+}
+
+    .auth-card input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    .auth-card button {
+        width: 100%;
+        padding: 12px;
+        background: #ff7a00;
+        border: none;
+        border-radius: 25px;
+        color: white;
+        font-weight: bold;
+    }
+
+.hidden {
+    display: none;
+}
+
+.switch {
+    margin-top: 10px;
+}
+
+.validation-errors {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.schedule-btn {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    line-height: 1;
+}
+
+    .schedule-btn.add {
+        background: green;
+    }
+
+    .schedule-btn.remove {
+        background: #c40020;
+    }
+
+    .schedule-btn:hover {
+        transform: scale(1.08);
+    }
+
+.logout-form {
+    display: inline;
+}
+
+.logout-link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+}
+
+    .logout-link:hover {
+        text-decoration: underline;
+    }
+
+.empty-schedule {
+    max-width: 500px;
+    margin: 80px auto;
+    padding: 40px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+    .empty-schedule h3 {
+        margin-bottom: 10px;
+    }
+
+    .empty-schedule p {
+        margin-bottom: 20px;
+        color: #444;
+    }
+
+.browse-panels {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #ff7a00;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+    .browse-panels:hover {
+        background: #ff9100;
+    }
+
+.page-header {
+    margin: 30px auto 25px auto;
+    padding: 20px 30px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+    .page-header h1 {
+        font-weight: 700;
+    }
+
+.notice-create-controls {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.publish-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.notice-admin-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.notice-admin-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.schedule-btn.edit {
+    background: #666;
+    color: white;
+}
+
+    .schedule-btn.edit:hover {
+        background: #888;
+    }
+
+.notice-edit-area {
+    margin-top: 10px;
+}
+
+.notice-edit-title {
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.notice-edit-content {
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.notice-edit-controls {
+    display: flex;
+    gap: 12px;
+}
+
+.notice-admin-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.notice-edit-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+    .notice-edit-controls button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+.notice-edit-title {
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.notice-edit-content {
+    margin-bottom: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+}

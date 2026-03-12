@@ -1,0 +1,95 @@
+﻿@model List<ComicConventionManager.Models.Notice>
+
+<div class="dashboard-layout">
+    <aside class="sidebar">
+        <a asp-controller="Notice" asp-action="Index">Notices</a>
+        <a href="#">Guests</a>
+        <a href="#">Location</a>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-controller="Panel" asp-action="Manage" style="color:red;">Manage Panels</a>
+            <a asp-controller="Notice" asp-action="Manage" style="color:red;">Manage Notices</a>
+        }
+    </aside>
+
+    <main class="panel-area">
+        <div class="page-header">
+            <h1>Manage Notices</h1>
+
+            <a asp-action="Create" class="browse-panels">
+                Create Notice
+            </a>
+        </div>
+
+        @foreach (var notice in Model)
+        {
+            <div class="panel-card notice-card" data-id="@notice.NoticeId">
+
+                <div class="panel-header">
+
+                    <h3 class="notice-title">@notice.Title</h3>
+
+                    <div class="notice-admin-controls">
+
+                        <button class="schedule-btn edit">✎</button>
+
+                        @if (!notice.IsPublished)
+                        {
+                            <a asp-action="Publish"
+                               asp-route-id="@notice.NoticeId"
+                               class="schedule-btn add">
+                                ✓
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-action="Unpublish"
+                               asp-route-id="@notice.NoticeId"
+                               class="schedule-btn remove"
+                               title="Unpublish">
+                                ⏎
+                            </a>
+                        }
+
+                        <a asp-action="Delete"
+                           asp-route-id="@notice.NoticeId"
+                           class="schedule-btn remove">
+                            −
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <p class="notice-content">@notice.Content</p>
+
+                <div class="notice-edit-area" style="display:none;">
+
+                    <input class="notice-edit-title form-control"
+                           value="@notice.Title" />
+
+                    <textarea class="notice-edit-content form-control">@notice.Content</textarea>
+
+                    <div class="notice-edit-controls">
+
+                        <button class="browse-panels save-btn">
+                            Save
+                        </button>
+
+                        <button class="schedule-btn remove cancel-btn">
+                            X
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="panel-meta">
+                    Status: @(notice.IsPublished ? "Published" : "Draft")
+                </div>
+
+            </div>
+        }
+    </main>
+</div>

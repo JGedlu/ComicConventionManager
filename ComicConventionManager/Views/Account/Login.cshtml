@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div id="loginForm">
+            <h2>Login</h2>
+
+            <form asp-action="Login" method="post">
+                <input name="Email" placeholder="Username / Email" required />
+                <input type="password" name="Password" placeholder="Password" required />
+                <button type="submit">Login</button>
+
+                <div class="switch">
+                    New User?
+                    <a href="#" onclick="showRegister()">Register Here</a>
+                </div>
+            </form>
+        </div>
+
+        <div id="registerForm" class="hidden">
+            <h2>Register</h2>
+
+            <form asp-action="Register" method="post">
+                <input name="Name" placeholder="Username" required />
+                <input type="email" name="Email" placeholder="Email" required />
+                <input type="password" name="Password" placeholder="Password" required />
+                <input type="password" name="ConfirmPassword" placeholder="Confirm Password" required />
+                <button type="submit">Register</button>
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="validation-errors">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <div>@error.ErrorMessage</div>
+                        }
+                    </div>
+                }
+
+                <div class="switch">
+                    Have an account?
+                    <a href="#" onclick="showLogin()">Login Here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showRegister() {
+        const login = document.getElementById("loginForm");
+        const register = document.getElementById("registerForm");
+
+        login.style.opacity = 0;
+
+        setTimeout(() => {
+            login.style.display = "none";
+            register.style.display = "block";
+            register.style.opacity = 0;
+
+            setTimeout(() => {
+                register.style.opacity = 1;
+            }, 20);
+
+        }, 120);
+    }
+
+    function showLogin() {
+        const login = document.getElementById("loginForm");
+        const register = document.getElementById("registerForm");
+
+        register.style.opacity = 0;
+
+        setTimeout(() => {
+            register.style.display = "none";
+            login.style.display = "block";
+            login.style.opacity = 0;
+
+            setTimeout(() => {
+                login.style.opacity = 1;
+            }, 20);
+
+        }, 120);
+    }
+</script>

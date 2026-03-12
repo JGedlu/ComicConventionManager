@@ -1,7 +1,6 @@
 ﻿@model List<ComicConventionManager.Models.Panel>
 
 <div class="dashboard-layout">
-
     <aside class="sidebar">
         <a asp-controller="Notice" asp-action="Index">Notices</a>
         <a href="#">Guests</a>
@@ -15,46 +14,42 @@
     </aside>
 
     <main class="panel-area">
+        <div class="page-header">
+            <h1>My Schedule</h1>
+        </div>
+
+        @if (Model.Count == 0)
+        {
+            <div class="empty-schedule">
+                <p>You haven't added any panels yet.</p>
+
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="browse-panels">
+                    Browse Panels
+                </a>
+            </div>
+        }
 
         @foreach (var panel in Model)
         {
             <div class="panel-card">
-
                 <div class="panel-header">
                     <h3>@panel.Title</h3>
-                    @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
-                    {
-                        var userPanels = ViewBag.UserPanels as List<int>;
-
-                        if (userPanels != null && userPanels.Contains(panel.PanelId))
-                        {
-                            <a asp-controller="Schedule"
-                               asp-action="Remove"
-                               asp-route-id="@panel.PanelId"
-                               asp-route-returnUrl="@Context.Request.Path"
-                               class="schedule-btn remove">
-                                −
-                            </a>
-                        }
-                        else
-                        {
-                            <a asp-controller="Schedule"
-                               asp-action="Add"
-                               asp-route-id="@panel.PanelId"
-                               class="schedule-btn add">
-                                +
-                            </a>
-                        }
-                    }
+                    <a asp-controller="Schedule"
+                       asp-action="Remove"
+                       asp-route-id="@panel.PanelId"
+                       asp-route-returnUrl="@Context.Request.Path"
+                       class="schedule-btn remove">
+                        −
+                    </a>
                 </div>
 
                 <p>@panel.Description</p>
-
                 <div class="panel-meta">
 
                     @{
                         string formattedDate;
-
                         if (panel.EndDate != null)
                         {
                             formattedDate =

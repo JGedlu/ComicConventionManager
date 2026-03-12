@@ -1,0 +1,40 @@
+﻿@model List<ComicConventionManager.Models.Notice>
+
+<div class="dashboard-layout">
+
+    <aside class="sidebar">
+        <a asp-controller="Notice" asp-action="Index">Notices</a>
+        <a href="#">Guests</a>
+        <a href="#">Location</a>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-controller="Panel" asp-action="Manage" style="color:red;">Manage Panels</a>
+            <a asp-controller="Notice" asp-action="Manage" style="color:red;">Manage Notices</a>
+        }
+    </aside>
+
+    <main class="panel-area">
+
+        <div class="page-header">
+            <h1>Convention Notices</h1>
+            <p>Announcements from convention staff</p>
+        </div>
+
+        @foreach (var notice in Model)
+        {
+            <div class="panel-card">
+                <div class="panel-header">
+                    <h3>@notice.Title</h3>
+                </div>
+
+                <p>@notice.Content</p>
+
+                <div class="panel-meta">
+                    Posted @notice.CreatedAt.ToString("MMMM d, yyyy")
+                </div>
+            </div>
+        }
+
+    </main>
+</div>
